@@ -14,7 +14,6 @@ The Jito Backrun Arb Bot implements this strategy in three main steps:
 
 3. **Executing the arbitrage transaction**: The bot places its own trade immediately after the large trade is executed, then completes the arbitrage route to return the market closer to its original balance.
 
-![Backrun Strategy Diagram](https://showme.redstarplugin.com/d/ZeHqaNDh)
 
 ## Detailed Explanation
 
