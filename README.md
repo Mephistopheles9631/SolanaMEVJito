@@ -1,6 +1,6 @@
 # Jito Backrun Arb Bot
 
-The Jito Backrun Arb Bot is designed to perform backrun arbs on the Solana blockchain, specifically targeting SOL and USDC trades. It utilizes the Jito mempool and bundles to backrun trades, focusing on circular arbitrage strategies. The bot supports multiple platforms including Raydium, Raydium CLMM, Orca Whirlpools, and Orca AMM pools.
+The Jito Backrun Arb Bot is designed to perform backrun arbitrage on the Solana blockchain, specifically targeting SOL and USDC trades. It utilizes the Jito mempool and bundles to backrun trades, focusing on circular arbitrage strategies. The bot supports multiple platforms including Raydium, Raydium CLMM, Orca Whirlpools, and Orca AMM pools.
 
 ## Overview
 
@@ -20,9 +20,9 @@ The Jito Backrun Arb Bot implements this strategy in three main steps:
 
 ### Identifying Trades to Backrun
 
-The first step in the backrun strategy is to identify trades that can be backrun. This involves monitoring the mempool, which is a stream of pending transactions. For example, if a trade involving the sale of 250M BONK for 100 USDC on the Raydium exchange is detected, this trade can potentially be backrun.
+The first step in the backrun strategy is to identify trades that can be backrun. This involves monitoring the mempool, which is a stream of pending transactions. For example, if a trade involving the sale of 250M TURBO for 100 USDC on the Raydium exchange is detected, this trade can potentially be backrun.
 
-To determine the direction and size of the trade, the bot simulates the transaction and observes the changes in the account balances. If the USDC vault for the BONK-USDC pair on Raydium decreases by $100, it indicates that someone sold BONK for 100 USDC. This means that the backrun will be at most 100 USDC to bring the markets back in balance.
+To determine the direction and size of the trade, the bot simulates the transaction and observes the changes in the account balances. If the USDC vault for the TURBO-USDC pair on Raydium decreases by $100, it indicates that someone sold TURBO for 100 USDC. This means that the backrun will be at most 100 USDC to bring the markets back in balance.
 
 During this process, the bot listens to the mempool for all transactions that touch any of the relevant decentralized exchanges (DEXs) using the `programSubscribe` function (see `mempool.ts`). Many transactions use lookup tables that need to be resolved first before we know whether the transaction includes any of the relevant vaults. The `lookup-table-provider.ts` is used for this purpose.
 
@@ -30,10 +30,10 @@ During this process, the bot listens to the mempool for all transactions that to
 
 The next step is to find a profitable backrun arbitrage opportunity. This involves considering all possible 2 and 3 hop routes. A hop is a pair, and in this context, it refers to a trade from one asset to another.
 
-For example, if the original trade was a sale of BONK for USD on Raydium, the possible routes for backrun arbitrage could be:
+For example, if the original trade was a sale of TURBO for USD on Raydium, the possible routes for backrun arbitrage could be:
 
-- Buy BONK for USD on Raydium -> Sell BONK for USDC on another exchange (2 hop)
-- Buy BONK for USD on Raydium -> Sell BONK for SOL on Raydium -> Sell SOL for USDC on another exchange (3 hop)
+- Buy TURBO for USD on Raydium -> Sell TURBO for USDC on another exchange (2 hop)
+- Buy TURBO for USD on Raydium -> Sell TURBO for SOL on Raydium -> Sell SOL for USDC on another exchange (3 hop)
 
 The bot calculates the potential profit for each route in increments of the original trade size divided by a predefined number of steps (`ARB_CALCULATION_NUM_STEPS`). The route with the highest potential profit is selected for the actual backrun.
 
@@ -112,3 +112,9 @@ sudo docker run \
 - `./src/bot.ts` - entrypoint for the bot
 - `./src/clients/` - clients for rpc, block engine and geyser
 - `./src/markets/` - logic for getting all the pools and calculating routes on them
+
+## Developer
+
+This project is developed by Mehisto Pheles, a content creator and web3 enthusiast with a focus on decentralized finance (DeFi) and blockchain technologies. The goal of this bot is to leverage advanced trading strategies to optimize and profit from market inefficiencies within the Solana ecosystem.
+
+---
